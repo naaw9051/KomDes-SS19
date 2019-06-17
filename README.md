@@ -1,4 +1,4 @@
-# OSC Communication Demo
+# KomDes-WebApp
 
 ## Prerequisites
 

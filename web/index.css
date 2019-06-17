@@ -1,4 +1,64 @@
-.carousel-inner{
+@media only screen and (device-aspect-ratio: 16/9)
+{
+.startscene{
+
+  width:100%;
+  height: 100%;
+  position: fixed;
+  background: url("assets/images/background.jpg") 0 0 no-repeat;
+ 
+}
+
+#burger .goodburger, .badburger{
+  position: fixed;
+  height: 60%;
   width: auto;
-  height: 600px;
+  right:5%;
+  bottom:-5%;
+  
+}
+
+.badburger{
+  z-index: 12;
+  opacity:0;
+}
+
+.goodburger{
+  z-index: 12;
+}
+.cup{
+  position: fixed;
+  height: 100%;
+  width: auto;
+  right: -5%;
+  bottom: -5%;
+  z-index: 15;
+
+}
+#burger img {
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+}
+
+#burger:hover .goodburger {
+  opacity:0;
+}
+
+#burger:hover .badburger {
+  opacity: 1;
+}
+
+.background {
+
+  bottom:0;
+  right:0;
+  position:fixed;
+  height: 100%;
+  width: auto;
+  
+}
+
+
 }

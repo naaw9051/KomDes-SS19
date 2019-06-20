@@ -1,11 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/1">Seite 1</router-link> |
-      <router-link to="/2">Seite 2</router-link> |
-      <router-link to="/3">Seite 3</router-link> |
+    <div class="nav">
+      <button class="nav__sound customBtn" @click="toggleSound()">
+        <font-awesome-icon :icon="soundIcon" size="lg" />
+      </button>
+      <div class="nav__dots">
+        <div class="nav__dots--line"></div>
+        <router-link to="/1"><div class="nav__dots--link"></div></router-link>
+        <router-link to="/2"><div class="nav__dots--link"></div></router-link>
+        <router-link to="/3"><div class="nav__dots--link"></div></router-link>
+      </div>
+      <div class="nav__branding">
+        Sgeht?
+      </div>
     </div>
-    <transition :enter-active-class="transitionName"> 
+    <button class="arrowLeft customBtn" @click="previousPage()" :disabled=" disableLeftNavigation">
+      <font-awesome-icon icon="chevron-left" size="lg" />
+    </button>
+    <button class="arrowRight customBtn" @click="nextPage()" :disabled=" disableRightNavigation">
+      <font-awesome-icon icon="chevron-right" size="lg" />
+    </button>
+    <transition :enter-active-class="enterTransition" :leave-active-class="leaveTransition"> 
       <router-view></router-view>
     </transition>
   </div>
@@ -15,14 +30,46 @@
 export default { 
   data () {
     return {
-      transitionName: 'animated slideInRight'
+      disableLeftNavigation: false,
+      disableRightNavigation: false,
+      soundIcon: "volume-up",
+      playAudio: true,
+      enterTransition: 'animated slideInRight',
+      leaveTransition: 'animated slideOutLeft'
+    }
+  },
+  methods: {
+    nextPage: function(){
+      let newRoute = parseInt(this.$route.path.slice(1)) + 1
+      if(!this.disableRightNavigation)
+        this.$router.push(`${newRoute}`)
+    },
+    previousPage: function(){
+      let newRoute = parseInt(this.$route.path.slice(1)) - 1
+      if(!this.disableLeftNavigation)
+        this.$router.push(`${newRoute}`)
+    },
+    toggleSound: function(){
+      this.playAudio = !this.playAudio
+
+      if(this.playAudio){
+        this.soundIcon = "volume-up"
+        // restart audio file here
+      }
+      else{
+        this.soundIcon = "volume-mute"
+        // stop audio file here
+      }
     }
   },
   watch: {
     '$route' (to, from) {
       const toDepth = to.path.slice(1)
       const fromDepth = from.path.slice(1)
-      this.transitionName = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
+      this.enterTransition = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
+      this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
+      this.disableLeftNavigation = parseInt(toDepth) - 1 < 1
+      this.disableRightNavigation = parseInt(toDepth) + 1 > 3
     }
   }
 }
@@ -34,6 +81,7 @@ export default {
 body {
   margin: 0;
 }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -41,16 +89,98 @@ body {
   text-align: center;
   color: #2c3e50;
 }
-#nav {
-  background:#2c3e50;
+
+.nav {
   height: 60px;
   width: 100%;
+  background:#2c3e50;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+
+  &__branding {
+    margin-right: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  
+  &__dots {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+
+    &--line{
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      border-top: 3px solid #bbb;
+      transform: translateY(-50%);
+    }
+
+    .router-link-exact-active &--link{
+      background: #bbb;
+    }
+
+    &--link {
+      position: relative;
+      margin: 0 16px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      background: #2c3e50;
+      border: 2px solid #bbb;
+
+      &:hover {
+        background: #e9e9e9;
+      }
+    }
+  }
+  
+  &__sound {
+    margin: 20px;
+    color: white;
+  }
+
   a {
     font-weight: bold;
     color: #dbcda1;
     &.router-link-exact-active {
       color: #42b983;
     }
-  }
+  } 
+}
+.arrowLeft {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-left: 50px;
+  z-index: 2;
+}
+
+.arrowRight {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: 50px;
+  z-index: 2;
+}
+
+.customBtn {
+  border: none;
+  background: transparent;
+	outline: none;
+
+  &:hover {
+    color: #42b983;
+   }
+}
+
+.page {
+  position: fixed;
+  width: 100%;
 }
 </style>

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import LandingPage from './views/LandingPage.vue'
 import StoreFront from './views/StoreFront.vue'
 import StoreShelf from './views/StoreShelf.vue'
@@ -10,28 +9,23 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/landing-page',
+      path: '/1',
       name: 'LandingPage',
       component: LandingPage
     },
     {
-      path: '/store-front',
+      path: '/2',
       name: 'StroreFront',
       component: StoreFront
     },
     {
-      path: '/store-shelf',
+      path: '/3',
       name: 'StroreShelf',
       component: StoreShelf
     },
     {
       path: '*',
-      redirect: '/'
+      redirect: '/1'
     }
   ]
 })

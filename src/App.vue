@@ -1,18 +1,36 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/landing-page">Seite 1</router-link> |
-      <router-link to="/store-front">Seite 2</router-link> |
-      <router-link to="/store-shelf">Seite 3</router-link> |
+      <router-link to="/1">Seite 1</router-link> |
+      <router-link to="/2">Seite 2</router-link> |
+      <router-link to="/3">Seite 3</router-link> |
     </div>
-    <transition name="slide" :duration="{ enter: 500, leave: 800 }">
+    <transition :enter-active-class="transitionName"> 
       <router-view></router-view>
     </transition>
   </div>
 </template>
 
+<script>
+export default { 
+  data () {
+    return {
+      transitionName: 'animated slideInRight'
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.slice(1)
+      const fromDepth = from.path.slice(1)
+      this.transitionName = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
+    }
+  }
+}
+</script>
+
 <style lang="scss">
+@import './../node_modules/animate.css/animate.min.css';
+
 body {
   margin: 0;
 }

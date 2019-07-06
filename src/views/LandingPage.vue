@@ -18,7 +18,7 @@
       <div class="info__text">
         <p><span class="info__fact">88888 </span>Lorem, ipsum dolor.</p>
         <p><span class="info__fact">88888 </span>Lorem, ipsum dolor.</p>
-        <p><span class="info__fact">88888 </span>Lorem, ipsum dolor.</p>    
+        <p><span class="info__fact">88888 </span>Lorem, ipsum dolor.</p>
       </div>
     </div>
     <div class="foreground__burger">
@@ -57,7 +57,7 @@ export default {
         position: absolute;
         right: 0;
         bottom: 0;
-        height: 100%; 
+        height: 100%;
         width: auto;
       }
 
@@ -115,6 +115,7 @@ export default {
       bottom: 40px;
       width: fit-content;
       height: fit-content;
+      filter: drop-shadow(0 0 30px #d37321);
 
       &--good {
         position: absolute;

@@ -112,7 +112,7 @@ export default {
     &__burger {
       position: absolute;
       right: 200px;
-      bottom: 40px;
+      bottom: 100px;
       width: 283px;
       height: 200px;
       filter: drop-shadow(0 0 30px #d37321);

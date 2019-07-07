@@ -35,7 +35,11 @@ export default {
       soundIcon: 'volume-up',
       playAudio: true,
       enterTransition: 'animated slideInRight',
-      leaveTransition: 'animated slideOutLeft'
+      leaveTransition: 'animated slideOutLeft',
+      currentAudios: [],
+      pageOneAudios: [new Audio(require('./assets/audio/city.mp3'))],
+      pageTwoAudios: [new Audio(require('./assets/audio/supermarket.mp3'))],
+      pageThreeAudios: [new Audio(require('./assets/audio/supermarket.mp3'))]
     }
   },
   methods: {
@@ -47,17 +51,28 @@ export default {
       let newRoute = parseInt(this.$route.path.slice(1)) - 1
       if (!this.disableLeftNavigation) { this.$router.push(`${newRoute}`) }
     },
-    toggleSound: function () {
-      this.playAudio = !this.playAudio
+    changeAudio: function (route) {
+      for (let audio of this.currentAudios) {
+        audio.pause()
+      }
+
+      if (route === 1) { this.currentAudios = this.pageOneAudios }
+      if (route === 2) { this.currentAudios = this.pageTwoAudios }
+      if (route === 3) { this.currentAudios = this.pageThreeAudios }
 
       if (this.playAudio) {
-        this.soundIcon = 'volume-up'
-        // restart audio file here
-      } else {
-        this.soundIcon = 'volume-mute'
-        // stop audio file here
+        for (let audio of this.currentAudios) {
+          audio.loop = true
+          audio.play()
+        }
       }
+    },
+    toggleSound: function () {
+      this.playAudio = !this.playAudio
     }
+  },
+  mounted () {
+    this.changeAudio(parseInt(this.$route.path.slice(1)))
   },
   watch: {
     '$route' (to, from) {
@@ -67,6 +82,21 @@ export default {
       this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
       this.disableLeftNavigation = parseInt(toDepth) - 1 < 1
       this.disableRightNavigation = parseInt(toDepth) + 1 > 3
+      this.changeAudio(parseInt(toDepth))
+    },
+    playAudio: function () {
+      if (this.playAudio) {
+        this.soundIcon = 'volume-up'
+        for (let audio of this.currentAudios) {
+          audio.loop = true
+          audio.play()
+        }
+      } else {
+        this.soundIcon = 'volume-mute'
+        for (let audio of this.currentAudios) {
+          audio.pause()
+        }
+      }
     }
   }
 }

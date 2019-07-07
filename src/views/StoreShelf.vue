@@ -6,37 +6,50 @@
       <div class="background__info--right">Untersuch' das Gemüse <br> und schau was passiert</div>
     </div>
     <div class="foreground">
-      <div v-b-modal.veggieCount class="foreground__food avocado">
+      <div class="foreground__food avocado" @click="openModal(0)">
         <img class="foreground__food--bad avocado" src="../assets/images/badburger.png">
         <img class="foreground__food--good avocado" src="../assets/images/goodburger.png">
       </div>
-      <div v-b-modal.veggieCount class="foreground__food cucumber">
+      <div class="foreground__food cucumber" @click="openModal(1)">
         <img class="foreground__food--bad cucumber" src="../assets/images/badburger.png">
         <img class="foreground__food--good cucumber" src="../assets/images/goodburger.png">
       </div>
-      <div v-b-modal.veggieCount class="foreground__food tomato">
+      <div class="foreground__food tomato" @click="openModal(2)">
         <img class="foreground__food--bad tomato" src="../assets/images/badburger.png">
         <img class="foreground__food--good tomato" src="../assets/images/goodburger.png">
       </div>
-       <b-modal id="veggieCount" size="lg" title="Zahlen in Gemüse">
-        <template slot="default">
-          <b-tabs content-class="mt-3">
-            <b-tab title="Avocados" active>
-              <p>Animation zu Avocados</p>
+       <b-modal ref="veggieCount" size="lg" title="Zahlen in Gemüse">
+          <b-tabs v-model="tabIndex" content-class="mt-3">
+            <b-tab class="veggieCount__body" title="Avocados">
+              <h3 align="center">Das sind ca. {{ avocadoValue }} Avocados!</h3>
+              <div class="veggieCount__grid">
+                <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+                <img v-for="item in avocados" src="../assets/images/badburger.png" class="veggieCount__veggie">
+              </div>
             </b-tab>
-            <b-tab title="Gurken">
-              <p>Animation zu Gurken</p>
+            <b-tab class="veggieCount__body" title="Gurken">
+              <h3 align="center">Das sind ca. {{ cucumberValue }} Gurken!</h3>
+              <div class="veggieCount__grid">
+                <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+                <img v-for="item in cucumbers" src="../assets/images/badburger.png"  class="veggieCount__veggie">
+              </div>
             </b-tab>
-            <b-tab title="Tomaten">
-              <p>Animation zu Tomaten</p>
-            </b-tab>
+            <b-tab class="veggieCount__body" title="Tomaten">
+              <h3 align="center">Das sind ca. {{ tomatoValue }} Tomaten!</h3>
+              <div class="veggieCount__grid">
+                <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+                <img v-for="item in tomatoes" src="../assets/images/badburger.png"  class="veggieCount__veggie">
+              </div>
+              </b-tab>
           </b-tabs>
-        </template>
         <template slot="modal-footer">
-          <p>
-            Custom Footer
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati esse autem voluptates repellat necessitatibus magni, rem expedita eligendi possimus deserunt harum reiciendis veritatis odio natus explicabo. Soluta voluptas doloribus similique! Obcaecati, eligendi. Tenetur delectus assumenda illum voluptatibus, tempora nisi voluptate officia, perferendis earum, reiciendis provident suscipit itaque architecto ratione eligendi sapiente eius expedita error atque quis. Ratione a animi dolorem nihil qui maxime libero saepe fuga blanditiis temporibus quam voluptates, tempora ullam perferendis itaque? Dicta et ea doloribus dolor accusamus.
-          </p>
+          <div>
+            <h4>Infos zum Fact oder ne Legende</h4>
+            <p>
+              Custom Footer
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati esse autem voluptates repellat necessitatibus magni, rem expedita eligendi possimus deserunt harum reiciendis veritatis odio natus explicabo.
+            </p>
+          </div>
         </template>
        </b-modal>
     </div>
@@ -45,7 +58,74 @@
 
 <script>
 export default {
+  data () {
+    return {
+      tabIndex: 0,
+      avocados: [],
+      cucumbers: [],
+      tomatoes: [],
+      drawnVeggies: false,
+      // Weight of veggie in grams
+      avocadoWeight: 150,
+      cucumberWeight: 300,
+      tomatoWeight: 80,
+      // One image in the grid represents 100 units (like tomatoes)
+      unitSize: 100,
+      // calculated veggies
+      avocadoValue: 0,
+      cucumberValue: 0,
+      tomatoValue: 0
+    }
+  },
+  methods: {
+    openModal (index) {
+      this.tabIndex = index
+      this.$refs['veggieCount'].show()
+      if (!this.drawnVeggies) { this.drawVeggies() }
+    },
+    drawVeggies () {
+      this.drawnVeggies = true
+      let values = this.calculateVeggies()
+      let avocadoCount = values[0]
+      let cucumberCount = values[1]
+      let tomatoCount = values[2]
 
+      this.startInterval(this.avocados, avocadoCount)
+      this.startInterval(this.cucumbers, cucumberCount)
+      this.startInterval(this.tomatoes, tomatoCount)
+    },
+    calculateVeggies () {
+      let numbers = []
+      let wasteInKG = 2000
+
+      // Rechnung für Avocados
+      let result = ((wasteInKG * 1000) / this.avocadoWeight) / this.unitSize
+      numbers.push(result)
+      this.avocadoValue = Math.ceil(result * this.unitSize)
+
+      // Rechnung für Gurken
+      result = ((wasteInKG * 1000) / this.cucumberWeight) / this.unitSize
+      numbers.push(result)
+      this.cucumberValue = Math.ceil(result * this.unitSize)
+
+      // Rechnung für Tomaten
+      result = ((wasteInKG * 1000) / this.tomatoWeight) / this.unitSize
+      numbers.push(result)
+      this.tomatoValue = Math.ceil(result * this.unitSize)
+
+      return numbers
+    },
+    startInterval (array, amount) {
+      let count = 0
+      let interval = setInterval(() => {
+        if (count > amount) {
+          clearInterval(interval)
+        }
+        array.push(count)
+        count++
+      }, 80)
+    }
+  }
 }
 </script>
 
@@ -155,6 +235,27 @@ export default {
       top: 0;
       filter: drop-shadow(0 0 20px #fa5359);
     }
+  }
+}
+
+.veggieCount {
+  &__body {
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  &__grid {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-template-columns: repeat(18, 30px);
+    grid-gap: 10px;
+  }
+
+  &__veggie {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

@@ -113,9 +113,22 @@ export default {
       position: absolute;
       right: 200px;
       bottom: 40px;
-      width: fit-content;
-      height: fit-content;
+      width: 283px;
+      height: 200px;
       filter: drop-shadow(0 0 30px #d37321);
+      transition: filter 1000ms ease-in;
+
+      &:hover {
+        filter: drop-shadow(0 0 30px #33442a);
+      }
+
+      &:hover .foreground__burger--bad  {
+        opacity: 1;
+      }
+
+      &:hover .foreground__burger--good  {
+        opacity: 0;
+      }
 
       &--good {
         position: absolute;
@@ -124,12 +137,19 @@ export default {
         height: 200px;
         width: auto;
         object-fit: contain;
+        opacity: 1;
+        transition: opacity 1000ms ease-in;
       }
 
       &--bad {
+        position: absolute;
+        left: 0;
+        top: 0;
         height: 220px;
         width: auto;
         object-fit: contain;
+        opacity: 0;
+        transition: opacity 1000ms ease-in;
       }
     }
   }

@@ -7,16 +7,16 @@
     </div>
     <div class="foreground">
       <div v-b-modal.veggieCount class="foreground__food avocado">
-        <img class="foreground__food--bad" src="../assets/images/badburger.png">
-        <img class="foreground__food--good" src="../assets/images/goodburger.png">
+        <img class="foreground__food--bad avocado" src="../assets/images/badburger.png">
+        <img class="foreground__food--good avocado" src="../assets/images/goodburger.png">
       </div>
       <div v-b-modal.veggieCount class="foreground__food cucumber">
-        <img class="foreground__food--bad" src="../assets/images/badburger.png">
-        <img class="foreground__food--good" src="../assets/images/goodburger.png">
+        <img class="foreground__food--bad cucumber" src="../assets/images/badburger.png">
+        <img class="foreground__food--good cucumber" src="../assets/images/goodburger.png">
       </div>
       <div v-b-modal.veggieCount class="foreground__food tomato">
-        <img class="foreground__food--bad" src="../assets/images/badburger.png">
-        <img class="foreground__food--good" src="../assets/images/goodburger.png">
+        <img class="foreground__food--bad tomato" src="../assets/images/badburger.png">
+        <img class="foreground__food--good tomato" src="../assets/images/goodburger.png">
       </div>
        <b-modal id="veggieCount" size="lg" title="Zahlen in Gemüse">
         <template slot="default">
@@ -99,31 +99,39 @@ export default {
     width: 600px;
 
     &__food {
-      position: absolute;
-      right: 200px;
-      bottom: 40px;
-      width: fit-content;
-      height: fit-content;
+
+      &:hover .foreground__food--bad  {
+        opacity: 1;
+      }
+
+      &:hover .foreground__food--good  {
+        opacity: 0;
+      }
 
       &--good {
         position: absolute;
         left: 0;
         top: 0;
-        height: 200px;
-        width: auto;
         object-fit: contain;
+        opacity: 1;
+        transition: opacity 1000ms ease-in;
       }
 
       &--bad {
-        height: 220px;
-        width: auto;
+        position: absolute;
+        left: 0;
+        top: 0;
         object-fit: contain;
+        opacity: 0;
+        transition: opacity 1000ms ease-in;
       }
     }
 
     .avocado {
       position: absolute;
       margin-top: 20px;
+      width: 283px;
+      height: 220px;
       left: 0;
       top: 0;
       filter: drop-shadow(0 0 20px #88b04b);
@@ -131,7 +139,9 @@ export default {
 
     .cucumber {
       position: absolute;
-      left: 50;
+      width: 283px;
+      height: 220px;
+      left: 70px;
       bottom: 0;
       filter: drop-shadow(0 0 20px #196941);
     }
@@ -139,6 +149,8 @@ export default {
     .tomato {
       position: absolute;
       margin-top: 20px;
+      width: 283px;
+      height: 220px;
       right: 0;
       top: 0;
       filter: drop-shadow(0 0 20px #fa5359);

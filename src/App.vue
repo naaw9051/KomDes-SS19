@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <div class="nav">
-      <button class="nav__sound customBtn" @click="toggleSound()">
+    <div class="paging">
+      <button class="paging__sound customBtn" @click="toggleSound()">
         <font-awesome-icon :icon="soundIcon" size="lg" />
       </button>
-      <div class="nav__dots">
-        <div class="nav__dots--line"></div>
-        <router-link to="/1"><div class="nav__dots--link"></div></router-link>
-        <router-link to="/2"><div class="nav__dots--link"></div></router-link>
-        <router-link to="/3"><div class="nav__dots--link"></div></router-link>
+      <div class="paging__dots">
+        <div class="paging__dots--line"></div>
+        <router-link to="/1"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/2"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/3"><div class="paging__dots--link"></div></router-link>
       </div>
-      <div class="nav__branding">
+      <div class="paging__branding">
         Sgeht?
       </div>
     </div>
@@ -20,44 +20,41 @@
     <button class="arrowRight customBtn" @click="nextPage()" :disabled=" disableRightNavigation">
       <font-awesome-icon icon="chevron-right" size="lg" />
     </button>
-    <transition :enter-active-class="enterTransition" :leave-active-class="leaveTransition"> 
+    <transition :enter-active-class="enterTransition" :leave-active-class="leaveTransition">
       <router-view></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-export default { 
+export default {
   data () {
     return {
       disableLeftNavigation: false,
       disableRightNavigation: false,
-      soundIcon: "volume-up",
+      soundIcon: 'volume-up',
       playAudio: true,
       enterTransition: 'animated slideInRight',
       leaveTransition: 'animated slideOutLeft'
     }
   },
   methods: {
-    nextPage: function(){
+    nextPage: function () {
       let newRoute = parseInt(this.$route.path.slice(1)) + 1
-      if(!this.disableRightNavigation)
-        this.$router.push(`${newRoute}`)
+      if (!this.disableRightNavigation) { this.$router.push(`${newRoute}`) }
     },
-    previousPage: function(){
+    previousPage: function () {
       let newRoute = parseInt(this.$route.path.slice(1)) - 1
-      if(!this.disableLeftNavigation)
-        this.$router.push(`${newRoute}`)
+      if (!this.disableLeftNavigation) { this.$router.push(`${newRoute}`) }
     },
-    toggleSound: function(){
+    toggleSound: function () {
       this.playAudio = !this.playAudio
 
-      if(this.playAudio){
-        this.soundIcon = "volume-up"
+      if (this.playAudio) {
+        this.soundIcon = 'volume-up'
         // restart audio file here
-      }
-      else{
-        this.soundIcon = "volume-mute"
+      } else {
+        this.soundIcon = 'volume-mute'
         // stop audio file here
       }
     }
@@ -80,6 +77,7 @@ export default {
 
 body {
   margin: 0;
+  user-select: none;
 }
 
 #app {
@@ -90,7 +88,7 @@ body {
   color: #2c3e50;
 }
 
-.nav {
+.paging {
   height: 60px;
   width: 100%;
   background:#2c3e50;
@@ -105,7 +103,7 @@ body {
     font-size: 18px;
     text-transform: uppercase;
   }
-  
+
   &__dots {
     position: relative;
     display: grid;
@@ -139,7 +137,7 @@ body {
       }
     }
   }
-  
+
   &__sound {
     margin: 20px;
     color: white;
@@ -151,7 +149,7 @@ body {
     &.router-link-exact-active {
       color: #42b983;
     }
-  } 
+  }
 }
 .arrowLeft {
   position: absolute;
@@ -172,10 +170,14 @@ body {
 .customBtn {
   border: none;
   background: transparent;
-	outline: none;
+  outline: none;
 
   &:hover {
     color: #42b983;
+   }
+
+  &:focus {
+    outline: none;
    }
 }
 

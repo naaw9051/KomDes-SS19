@@ -11,10 +11,15 @@ Go to this directory and run `npm install` in your command line.
 
 ## Usage
 
-To start this application, run `npm start` in your command line.
-The webpage is served on [http://localhost:3000](http://localhost:3000).
+To start this application, run `npm run serve` in your command line.
+The webpage is served on [http://localhost:8080](http://localhost:8080).
 
-### Basic Structure
+### Lints and fixes files
 
-`index.js` is a server for our webpage.
-All of our website files are saved in `/web`.
+To format the code in all files, run `npm run lint`.
+
+### Build Application For Production
+
+To create a production build, run `npm run build`.
+
+## Basic Structure

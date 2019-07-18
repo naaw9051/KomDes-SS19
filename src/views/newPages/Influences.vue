@@ -68,6 +68,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes osciShadow{
+  0%{
+    filter: drop-shadow(0 0 10px #6aa7cc);
+  }
+  50%{
+    filter: drop-shadow(0 0 20px #6aa7cc);
+  }
+  100%{
+    filter: drop-shadow(0 0 10px #6aa7cc);
+  }
+}
+
 .page {
   .pageWrapper {
     position: relative;
@@ -100,9 +112,11 @@ export default {
       &--line{
         position: absolute;
         top: 50%;
-        width: 100%;
+        left: 50%;
+        width: 97%;
         border: 6px solid #263845;
-        transform: translateY(-50%);
+        transform: translate(-50%, -50%);
+        animation: osciShadow 3s linear infinite;
         // filter: drop-shadow(0 0 20px #6aa7cc);
       }
 

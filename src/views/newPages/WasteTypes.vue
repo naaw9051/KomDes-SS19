@@ -1,6 +1,82 @@
 <template>
 <div class="page">
-
+  <div class="pageWrapper">
+    <div class="sectionContainer">
+      <div class="obst section animated slideInLeft slow">
+        <div class="images">
+          <img class="banana" src="../../assets/images/newScenes/Szene4/banane.png" alt="">
+          <img class="paprika" src="../../assets/images/newScenes/Szene4/paprika.png" alt="">
+          <img class="brokkoli" src="../../assets/images/newScenes/Szene4/brokkoli.png" alt="">
+        </div>
+        <p class="info">
+          <span class="headline--big">34%</span><br>
+          Obst & Gemüse
+        </p>
+      </div>
+      <div class="zubereitet section animated slideInLeft">
+        <div class="images">
+          <img src="../../assets/images/newScenes/Szene4/zubereitetes.png" alt="">
+        </div>
+        <p>
+          <span class="headline--big">16%</span><br>
+          Zubereitetes
+        </p>
+      </div>
+      <div class="brot section animated slideInLeft">
+        <div class="images">
+          <img src="../../assets/images/newScenes/Szene4/bread.png" alt="">
+        </div>
+        <p>
+          <span class="headline--big">14%</span><br>
+          Brot & Backwaren
+        </p>
+      </div>
+      <div class="drinks section animated slideInLeft fast">
+        <div class="images">
+          <img src="../../assets/images/newScenes/Szene4/soda.png" alt="">
+        </div>
+        <p>
+          <span class="headline--big">11%</span><br>
+          Getränke
+        </p>
+      </div>
+      <div class="milch section animated slideInLeft fast">
+        <div class="images">
+          <img class="milk" src="../../assets/images/newScenes/Szene4/milk.png" alt="">
+          <img class="cheese" src="../../assets/images/newScenes/Szene4/cheese.png" alt="">
+        </div>
+        <p class="info">
+          <span class="headline--big">9%</span><br>
+          Milchprodukte
+        </p>
+      </div>
+      <div class="fertig section animated slideInLeft faster">
+        <div class="images">
+          <img src="../../assets/images/newScenes/Szene4/can.png" alt="">
+        </div>
+        <p>
+          <span class="headline--big">7%</span><br>
+          Fertigprodukte
+        </p>
+      </div>
+      <div class="fleisch section animated slideInLeft faster">
+        <div class="images">
+          <img class="fish" src="../../assets/images/newScenes/Szene4/fish.png" alt="">
+          <img class="meat" src="../../assets/images/newScenes/Szene4/meat.png" alt="">
+        </div>
+        <p>
+          <span class="headline--big">4%</span><br>
+          Fleisch & Fisch
+        </p>
+      </div>
+      <div class="sonstiges section">
+        <p>
+          <span class="headline--big">5%</span><br>
+          Sonstiges
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -12,121 +88,199 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
-
-  .backgroundContainer {
-    position: absolute;
+  .pageWrapper {
+    position: relative;
+    background: #0f2331;
     width: 100%;
     height: 100%;
-    left:0;
-    top: 0;
+    background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
+    background-size: contain;
+    background-color: #0f2331;
 
-    .background {
+    .sectionContainer{
       position: relative;
-      width: 100%;
       height: 100%;
-      background: url('../../assets/images/background.jpg') 0 0 no-repeat;
+      width: 100%;
 
-      &__counter {
+      .section{
         position: absolute;
-        right: 0;
-        bottom: 0;
+        top: 0;
         height: 100%;
-        width: auto;
-      }
 
-      &__burgerpile {
-        position: absolute;
-        right: 525px;
-        bottom: 0;
-        width: auto;
-        height: 400px;
-      }
+        &:hover .images img{
+          filter: drop-shadow(0 0 30px #6aa7cc );
+        }
 
-      &__cup {
-        position: absolute;
-        margin-right: -70px;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: 90%;
-        filter: blur(3px);
+        &:hover p{
+          visibility: visible;
+        }
+
+        p{
+          visibility: hidden;
+        }
       }
     }
   }
+}
 
-  .foreground {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.headline--big{
+  color:#e19f25;
+}
 
-    .info {
-      position: absolute;
-      left: 120px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      color: #afafaf;
+.obst{
+  width: 34%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/a.png') center no-repeat;
+  background-size: cover;
 
-      &__title {
-        font-size: 30px;
-        white-space:nowrap;
-      }
+  .paprika {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 80px);
+    width: auto;
+    height: 120px;
+  }
 
-      &__text {
-        font-size: 16px;
-      }
+  .brokkoli {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% + 20px);
+    width: auto;
+    height: 110px;
+  }
 
-      &__fact {
-        font-size: 16px;
-        font-weight: bold;
-      }
-    }
+  .banana {
+    position: absolute;
+    bottom: 130px;
+    left: calc(50% - 25px);
+    width: auto;
+    height: 110px;
+  }
+}
 
-    &__burger {
-      position: absolute;
-      right: 200px;
-      bottom: 100px;
-      width: 283px;
-      height: 200px;
-      filter: drop-shadow(0 0 30px #d37321);
-      transition: filter 1000ms ease-in;
+.zubereitet{
+  left: 34%;
+  width: 16%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/b.png') center no-repeat;
+  background-size: cover;
 
-      &:hover {
-        filter: drop-shadow(0 0 30px #33442a);
-      }
+  .images img {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 50px);
+    width: auto;
+    height: 100px;
+  }
+}
 
-      &:hover .foreground__burger--bad  {
-        opacity: 1;
-      }
+.brot{
+  left: 50%;
+  width: 14%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/c.png') center no-repeat;
+  background-size: cover;
+    .images img {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 70px);
+    width: auto;
+    height: 100px;
+  }
+}
 
-      &:hover .foreground__burger--good  {
-        opacity: 0;
-      }
+.drinks{
+  left: 64%;
+  width: 10%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/d.png') center no-repeat;
+  background-size: cover;
 
-      &--good {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 200px;
-        width: auto;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 1000ms ease-in;
-      }
+    .images img {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 30px);
+    width: 80px;
+    height: auto;
+  }
+}
 
-      &--bad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 220px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 1000ms ease-in;
-      }
-    }
+.milch{
+  left: 74%;
+  width: 9%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/e.png') center no-repeat;
+  background-size: cover;
+
+  p{
+    font-size: 16px;
+  }
+
+  .milk {
+    position: absolute;
+    bottom: 85px;
+    left: calc(50% - 30px);
+    width: auto;
+    height: 120px;
+  }
+
+  .cheese {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 20px);
+    width: 70px;
+    height: auto;
+  }
+}
+
+.fertig{
+  left: 83%;
+  width: 7%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/f.png') center no-repeat;
+  background-size: cover;
+
+   p{
+    font-size: 12px;
+  }
+
+  .images img {
+    position: absolute;
+    bottom: 75px;
+    left: calc(50% - 30px);
+    width: 70px;
+    height: auto;
+  }
+}
+
+.fleisch{
+  left: 90%;
+  width: 6%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/g.png') center no-repeat;
+  background-size: cover;
+   p{
+    font-size: 12px;
+  }
+
+   .fish {
+    position: absolute;
+    transform: rotate(60deg);
+    bottom: 110px;
+    left: calc(50% - 60px);
+    width: 130px;
+    height: auto;
+  }
+
+  .meat {
+    position: absolute;
+    bottom: 90px;
+    left: calc(50% - 30px);
+    width: 70px;
+    height: auto;
+  }
+}
+
+.sonstiges{
+  left: 96%;
+  width: 4%;
+  background: url('../../assets/images/newScenes/Szene4/backgrounds/h.png') center no-repeat;
+  background-size: cover;
+   p{
+    font-size: 10px;
   }
 }
 </style>

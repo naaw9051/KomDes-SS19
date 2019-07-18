@@ -30,6 +30,7 @@
 export default {
   data () {
     return {
+      totalPages: 15,
       disableLeftNavigation: false,
       disableRightNavigation: false,
       soundIcon: 'volume-up',
@@ -81,7 +82,7 @@ export default {
       this.enterTransition = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
       this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
       this.disableLeftNavigation = parseInt(toDepth) - 1 < 1
-      this.disableRightNavigation = parseInt(toDepth) + 1 > 3
+      this.disableRightNavigation = parseInt(toDepth) + 1 > this.totalPages
       this.changeAudio(parseInt(toDepth))
     },
     playAudio: function () {
@@ -104,6 +105,29 @@ export default {
 
 <style lang="scss">
 @import './../node_modules/animate.css/animate.min.css';
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Medium.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Black.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Regular.ttf');
+  font-weight: 500;
+}
 
 body {
   margin: 0;
@@ -111,11 +135,12 @@ body {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #deebf7;
+  font-size: 20px;
 }
 
 .paging {
@@ -214,5 +239,6 @@ body {
 .page {
   position: fixed;
   width: 100%;
+  height: calc(100% - 60px);
 }
 </style>

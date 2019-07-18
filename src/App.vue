@@ -249,4 +249,12 @@ body {
   font-weight: bold;
   font-size: 28px;
 }
+
+.headline--big{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: bold;
+  font-size: 42px;
+}
 </style>

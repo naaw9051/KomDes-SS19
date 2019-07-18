@@ -1,132 +1,145 @@
 <template>
 <div class="page">
-
+  <div class="pageWrapper">
+    <div class="circleContainer">
+      <div class="circleContainer--line"></div>
+      <div class="environment circle" @click="showInfo('environment')" :class="{ active: toggleEnv }">
+        <img src="../../assets/images/newScenes/erdball.png" alt="">
+      </div>
+      <div class="resources circle" @click="showInfo('resources')" :class="{ active: toggleRes }">
+        <img src="../../assets/images/newScenes/blatt.png" alt="">
+      </div>
+      <div class="money circle" @click="showInfo('money')" :class="{ active: toggleMoney }">
+        <img src="../../assets/images/newScenes/geldschein.png" alt="">
+      </div>
+    </div>
+    <div class="infoContainer">
+      <span class="headline">{{ headline }}</span>
+      <p>
+        {{ infoText }}
+      </p>
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      headline: 'Was kannst du konkret damit bewirken?',
+      infoText: '',
+      environmentInfo: ['Umweltbelastung eindämmen', 'Jährlich entstehen durch die Lebensmittelverschwendung unnötigerweise mehr als 38 Millionen Tonnen Treibhausgase. Weniger wegwerfen heißt also auch, weniger Belastung für unsere Umwelt.'],
+      resourcesInfo: ['Ressourcenverlust vermeiden', 'Die Lebensmittelverschwendung geht mit immensen Ressourcenverlusten einher: Gut 43.000 Quadratkilometer landwirtschaftlicher Fläche werden genutzt, sowie 216 Millionen Kubikmeter Wasser verbraucht. Für jedes Nahrungsmittel verbrauchen  wir auch Energie bei Herstellung und Transport. Die Belastung durch Pflanzenschutzmittel, Mineral- und Wirtschaftsdünger kommen auch noch dazu.'],
+      moneyInfo: ['Geld sparen', 'Wir kaufen viel zu viel ein. Dadurch steigert sich die Nachfrage und erhöht so unnötig die Preise von Grundnahrungsmitteln. Im Jahr könnte man pro Person etwa 235-300 Euro sparen. Mit diesen 250 Euro könntest du deinen nächsten Städtetrip planen.'],
+      toggleEnv: false,
+      toggleRes: false,
+      toggleMoney: false
+    }
+  },
+  methods: {
+    showInfo: function (type) {
+      if (type === 'environment') {
+        this.toggleEnv = true
+        this.toggleRes = false
+        this.toggleMoney = false
+        this.headline = this.environmentInfo[0]
+        this.infoText = this.environmentInfo[1]
+      }
 
+      if (type === 'resources') {
+        this.toggleEnv = false
+        this.toggleRes = true
+        this.toggleMoney = false
+        this.headline = this.resourcesInfo[0]
+        this.infoText = this.resourcesInfo[1]
+      }
+
+      if (type === 'money') {
+        this.toggleEnv = false
+        this.toggleRes = false
+        this.toggleMoney = true
+        this.headline = this.moneyInfo[0]
+        this.infoText = this.moneyInfo[1]
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
-
-  .backgroundContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left:0;
-    top: 0;
-
-    .background {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url('../../assets/images/background.jpg') 0 0 no-repeat;
-
-      &__counter {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: auto;
-      }
-
-      &__burgerpile {
-        position: absolute;
-        right: 525px;
-        bottom: 0;
-        width: auto;
-        height: 400px;
-      }
-
-      &__cup {
-        position: absolute;
-        margin-right: -70px;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: 90%;
-        filter: blur(3px);
-      }
-    }
-  }
-
-  .foreground {
+  .pageWrapper {
     position: relative;
+    background: #0f2331;
     width: 100%;
     height: 100%;
+    background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
+    background-size: contain;
+    background-color: #0f2331;
 
-    .info {
+    .infoContainer {
       position: absolute;
-      left: 120px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      color: #afafaf;
-
-      &__title {
-        font-size: 30px;
-        white-space:nowrap;
-      }
-
-      &__text {
-        font-size: 16px;
-      }
-
-      &__fact {
-        font-size: 16px;
-        font-weight: bold;
-      }
+      top: 400px;
+      width: 80%;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    &__burger {
-      position: absolute;
-      right: 200px;
-      bottom: 100px;
-      width: 283px;
-      height: 200px;
-      filter: drop-shadow(0 0 30px #d37321);
-      transition: filter 1000ms ease-in;
+    .circleContainer{
+      position: relative;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      align-items: center;
 
-      &:hover {
-        filter: drop-shadow(0 0 30px #33442a);
-      }
-
-      &:hover .foreground__burger--bad  {
-        opacity: 1;
-      }
-
-      &:hover .foreground__burger--good  {
-        opacity: 0;
-      }
-
-      &--good {
+      &--line{
         position: absolute;
-        left: 0;
-        top: 0;
+        top: 50%;
+        width: 100%;
+        border: 6px solid #263845;
+        transform: translateY(-50%);
+        // filter: drop-shadow(0 0 20px #6aa7cc);
+      }
+
+      .circle{
+        position: relative;
+        width: 200px;
         height: 200px;
-        width: auto;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 1000ms ease-in;
+        border-radius: 50%;
+        background: #263845;
+
+        &:hover{
+          border: 5px solid #6aa7cc;
+        }
+
+        img{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 100px;
+          width: auto;
+        }
       }
 
-      &--bad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 220px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 1000ms ease-in;
+      .active{
+        border: 5px solid #6aa7cc;
+        filter: drop-shadow(0 0 20px #6aa7cc);
+        width: 250px;
+        height: 250px;
+
+        img{
+          height: 150px;
+          width: auto;
+          }
       }
     }
   }
 }
+
 </style>

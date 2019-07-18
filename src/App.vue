@@ -77,13 +77,13 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      const toDepth = to.path.slice(1)
-      const fromDepth = from.path.slice(1)
+      const toDepth = parseInt(to.path.slice(1))
+      const fromDepth = parseInt(from.path.slice(1))
       this.enterTransition = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
       this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
-      this.disableLeftNavigation = parseInt(toDepth) - 1 < 1
-      this.disableRightNavigation = parseInt(toDepth) + 1 > this.totalPages
-      this.changeAudio(parseInt(toDepth))
+      this.disableLeftNavigation = toDepth - 1 < 1
+      this.disableRightNavigation = toDepth + 1 > this.totalPages
+      this.changeAudio(toDepth)
     },
     playAudio: function () {
       if (this.playAudio) {

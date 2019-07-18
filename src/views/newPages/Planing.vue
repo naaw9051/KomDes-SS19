@@ -1,6 +1,24 @@
 <template>
 <div class="page">
-
+  <div class="pageWrapper">
+    <div class="imgContainer animated swing slow">
+      <img class="shoppinglist" v-b-tooltip.hover title="Butter, Milch, Einkaufstasche mitnehmen..." src="../../assets/images/newScenes/Einkaufliste.png" alt="">
+    </div>
+    <div class="infoContainer">
+      <div class="info">
+        <span class="headline">Plane und kontrolliere deine Vorräte</span>
+        <div class="info__text">
+          <p>
+          Geh lieber einmal mehr zum Supermarkt als einmal zu oft zur Mülltonne.<br>
+          Schau vorm Einkaufen erstmal was man du zuhause hast, vielleicht brauchst du weniger als du denkst.<br> <br>
+          Vor allem bei verderblichen Lebensmitteln lohnt es!<br>
+          Online finden sich sehr viele Rezepte: Koch dir etwas aus deinen Vorräten und spare an Geld.<br><br>
+          Gut möglich, dass du sogar ein neues Lieblingsgericht entdeckst.<br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -12,119 +30,44 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
-
-  .backgroundContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left:0;
-    top: 0;
-
-    .background {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url('../../assets/images/background.jpg') 0 0 no-repeat;
-
-      &__counter {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: auto;
-      }
-
-      &__burgerpile {
-        position: absolute;
-        right: 525px;
-        bottom: 0;
-        width: auto;
-        height: 400px;
-      }
-
-      &__cup {
-        position: absolute;
-        margin-right: -70px;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: 90%;
-        filter: blur(3px);
-      }
-    }
-  }
-
-  .foreground {
+  .pageWrapper {
     position: relative;
+    background: #0f2331;
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
 
-    .info {
-      position: absolute;
-      left: 120px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      color: #afafaf;
+    .imgContainer {
+      position: relative;
+      justify-items: center;
+      height: 100%;
+      width: 100%;
 
-      &__title {
-        font-size: 30px;
-        white-space:nowrap;
-      }
-
-      &__text {
-        font-size: 16px;
-      }
-
-      &__fact {
-        font-size: 16px;
-        font-weight: bold;
+      .shoppinglist{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 77%;
+        width: auto;
       }
     }
 
-    &__burger {
-      position: absolute;
-      right: 200px;
-      bottom: 100px;
-      width: 283px;
-      height: 200px;
-      filter: drop-shadow(0 0 30px #d37321);
-      transition: filter 1000ms ease-in;
+    .infoContainer {
+      background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
+      background-size: contain;
+      background-color: #0f2331;
+      border-left: #263845 solid 3px;
+      position: relative;
 
-      &:hover {
-        filter: drop-shadow(0 0 30px #33442a);
-      }
-
-      &:hover .foreground__burger--bad  {
-        opacity: 1;
-      }
-
-      &:hover .foreground__burger--good  {
-        opacity: 0;
-      }
-
-      &--good {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 200px;
-        width: auto;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 1000ms ease-in;
-      }
-
-      &--bad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 220px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 1000ms ease-in;
+      .info{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 80%;
       }
     }
   }

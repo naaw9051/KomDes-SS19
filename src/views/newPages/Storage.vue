@@ -1,6 +1,33 @@
 <template>
 <div class="page">
-
+  <div class="pageWrapper">
+    <div class="infoContainer">
+      <div class="info">
+        <span class="headline">Gib ihnen ein neues Zuhause</span>
+        <div class="info__text">
+          <p>
+          Damit alles lange haltbar bleibt, lagere deine Lebensmittel entsprechend.<br><br>
+          Bei den meisten Lebensmitteln steht drauf, wie sie am besten gelagert werden sollen.<br>
+          Wenn man sich unsicher ist, kann man sich online schnell die richtige Lagerungsweise heraussuchen.<br><br>
+          Den Lagerort sollte man dringend sauber halten.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="imgContainer">
+      <div class="arranged">
+        <div class="box animated bounceInDown">
+          <img src="../../assets/images/newScenes/Lagerung2.png" alt="">
+        </div>
+        <div class="dose animated bounceInLeft delay-1s">
+          <img v-b-tooltip.hover title="Bin auch super für unterwegs!" src="../../assets/images/newScenes/Lagerung3.png" alt="">
+        </div>
+        <div class="glas animated pulse delay-1s">
+          <img src="../../assets/images/newScenes/Lagerung1.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -12,119 +39,87 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
-
-  .backgroundContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left:0;
-    top: 0;
-
-    .background {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url('../../assets/images/background.jpg') 0 0 no-repeat;
-
-      &__counter {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: auto;
-      }
-
-      &__burgerpile {
-        position: absolute;
-        right: 525px;
-        bottom: 0;
-        width: auto;
-        height: 400px;
-      }
-
-      &__cup {
-        position: absolute;
-        margin-right: -70px;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: 90%;
-        filter: blur(3px);
-      }
-    }
-  }
-
-  .foreground {
+  .pageWrapper {
     position: relative;
+    background: #0f2331;
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
 
-    .info {
-      position: absolute;
-      left: 120px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      color: #afafaf;
+    .imgContainer {
+      position: relative;
+      justify-items: center;
+      height: 100%;
+      width: 100%;
 
-      &__title {
-        font-size: 30px;
-        white-space:nowrap;
-      }
+      .arranged{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 420px;
+        width: 500px;
 
-      &__text {
-        font-size: 16px;
-      }
+        .box{
+          position: relative;
+          left: -50px;
+          height: 250px;
+          width: auto;
 
-      &__fact {
-        font-size: 16px;
-        font-weight: bold;
+          img {
+          height: 250px;
+          width: auto;
+          }
+        }
+
+        .dose{
+          position: absolute;
+          left: 0;
+          top: 200px;
+          height: 200px;
+          width: auto;
+
+          img {
+          height: 200px;
+          width: auto;
+          }
+        }
+
+        .glas{
+          position: absolute;
+          right: 0;
+          top: 100px;
+          height: 320px;
+          width: auto;
+
+          img {
+            height: 320px;
+            width: auto;
+          }
+        }
       }
     }
+    .infoContainer {
+      background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
+      background-size: contain;
+      background-color: #0f2331;
+      border-right: #263845 solid 3px;
+      position: relative;
 
-    &__burger {
-      position: absolute;
-      right: 200px;
-      bottom: 100px;
-      width: 283px;
-      height: 200px;
-      filter: drop-shadow(0 0 30px #d37321);
-      transition: filter 1000ms ease-in;
+      .info{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 80%;
 
-      &:hover {
-        filter: drop-shadow(0 0 30px #33442a);
-      }
+        &__description{
+        }
 
-      &:hover .foreground__burger--bad  {
-        opacity: 1;
-      }
-
-      &:hover .foreground__burger--good  {
-        opacity: 0;
-      }
-
-      &--good {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 200px;
-        width: auto;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 1000ms ease-in;
-      }
-
-      &--bad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 220px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 1000ms ease-in;
+        &__text{
+        }
       }
     }
   }

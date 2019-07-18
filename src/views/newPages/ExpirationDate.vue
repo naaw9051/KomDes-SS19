@@ -70,21 +70,8 @@ export default {
           left: 50%;
           transform: translate(-50%, -50%);
           width: 80%;
-
-        &__description{
-        }
-
-        &__text{
-        }
       }
     }
   }
-}
-.headline{
-  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #6aa7cc;
-  font-weight: bold;
-  font-size: 28px;
 }
 </style>

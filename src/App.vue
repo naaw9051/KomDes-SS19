@@ -257,4 +257,12 @@ body {
   font-weight: bold;
   font-size: 42px;
 }
+
+.nav {
+  height: 60px;
+  width: 100%;
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  align-items: center;
+  background: #343a40 ;
+}
 </style>

@@ -20,15 +20,15 @@
     <div class="imgContainer">
       <div class="crate">
         <img class="crate--main" src="../../assets/images/newScenes/kiste.png" alt="">
-        <div class="tomato">
+        <div class="tomato animated bounceInDown fast" @click="openModal(2)">
           <img class="tomato--bad" src="../../assets/images/newScenes/food/veggies/tomate-faul-oben.png" alt="">
           <img class="tomato--good" src="../../assets/images/newScenes/food/veggies/tomate-oben.png" alt="">
         </div>
-        <div class="banana">
+        <div class="banana animated bounceInDown slow" @click="openModal(0)">
           <img class="banana--bad" src="../../assets/images/newScenes/food/fruits/banane-faul.png" alt="">
           <img class="banana--good" src="../../assets/images/newScenes/food/fruits/banane-frisch.png" alt="">
         </div>
-        <div class="gurke">
+        <div class="gurke animated bounceInDown fast" @click="openModal(1)">
           <img class="gurke--bad" src="../../assets/images/newScenes/food/veggies/gurke-faul.png" alt="">
           <img class="gurke--good" src="../../assets/images/newScenes/food/veggies/gurke.png" alt="">
         </div>
@@ -37,6 +37,36 @@
         <img class="crate--front" src="../../assets/images/newScenes/kiste-front.png" alt="">
       </div>
     </div>
+    <b-modal ref="veggieCount" size="lg" header-bg-variant="dark" body-bg-variant="dark" footer-bg-variant="dark">
+      <b-tabs v-model="tabIndex" content-class="mt-3" class="gridContainer">
+        <b-tab class="veggieCount__body" title="Bananen">
+          <div class="veggieCount__grid">
+            <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+            <img v-for="item in bananas" src="../../assets/images/newScenes/food/fruits/banane.png" class="veggieCount__veggie">
+          </div>
+        </b-tab>
+        <b-tab class="veggieCount__body" title="Gurken">
+          <div class="veggieCount__grid">
+            <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+            <img v-for="item in cucumbers" src="../../assets/images/newScenes/food/veggies/gurke.png" class="veggieCount__veggie">
+          </div>
+        </b-tab>
+        <b-tab class="veggieCount__body" title="Tomaten">
+          <div class="veggieCount__grid">
+            <!-- eslint-disable-next-line vue/require-v-for-key, vue/no-unused-vars -->
+            <img v-for="item in tomatoes" src="../../assets/images/newScenes/food/veggies/tomate-oben.png"  class="veggieCount__veggie">
+          </div>
+        </b-tab>
+      </b-tabs>
+      <template slot="modal-footer">
+        <div class="customFooter">
+          <p>
+            Umgerechnet werden <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }}/ Sekunde weggeschmissen. <br>
+            Ein Bild steht für {{ currentVeggie }}.
+          </p>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </div>
 </template>
@@ -44,6 +74,104 @@
 <script>
 export default {
 
+  data () {
+    return {
+      tabIndex: 0,
+      bananas: [],
+      cucumbers: [],
+      tomatoes: [],
+      drawnVeggies: false,
+      // Weight of veggie in grams
+      bananaWeight: 150,
+      cucumberWeight: 300,
+      tomatoWeight: 80,
+      // One image in the grid represents 100 units (like tomatoes)
+      unitSize: 100,
+      // calculated veggies
+      bananaValue: 0,
+      cucumberValue: 0,
+      tomatoValue: 0,
+      currentValue: 0,
+      currentVeggie: ''
+    }
+  },
+  methods: {
+    openModal (index) {
+      this.tabIndex = index
+      this.$refs['veggieCount'].show()
+      if (!this.drawnVeggies) { this.drawVeggies() }
+      if (this.tabIndex === 0) {
+        this.currentValue = this.bananaValue
+        this.currentVeggie = 'Bananen'
+      }
+      if (this.tabIndex === 1) {
+        this.currentValue = this.cucumberValue
+        this.currentVeggie = 'Gurken'
+      }
+      if (this.tabIndex === 2) {
+        this.currentValue = this.tomatoValue
+        this.currentVeggie = 'Tomaten'
+      }
+    },
+    drawVeggies () {
+      this.drawnVeggies = true
+      let values = this.calculateVeggies()
+      let bananaCount = values[0]
+      let cucumberCount = values[1]
+      let tomatoCount = values[2]
+
+      this.startInterval(this.bananas, bananaCount)
+      this.startInterval(this.cucumbers, cucumberCount)
+      this.startInterval(this.tomatoes, tomatoCount)
+    },
+    calculateVeggies () {
+      let numbers = []
+      let wasteInKG = 2000
+
+      // Rechnung für bananas
+      let result = ((wasteInKG * 1000) / this.bananaWeight) / this.unitSize
+      numbers.push(result)
+      this.bananaValue = Math.ceil(result * this.unitSize)
+
+      // Rechnung für Gurken
+      result = ((wasteInKG * 1000) / this.cucumberWeight) / this.unitSize
+      numbers.push(result)
+      this.cucumberValue = Math.ceil(result * this.unitSize)
+
+      // Rechnung für Tomaten
+      result = ((wasteInKG * 1000) / this.tomatoWeight) / this.unitSize
+      numbers.push(result)
+      this.tomatoValue = Math.ceil(result * this.unitSize)
+
+      return numbers
+    },
+    startInterval (array, amount) {
+      let count = 0
+      let interval = setInterval(() => {
+        if (count > amount) {
+          clearInterval(interval)
+        }
+        array.push(count)
+        count++
+      }, 80)
+    }
+  },
+  watch: {
+    tabIndex: function () {
+      if (this.tabIndex === 0) {
+        this.currentValue = this.bananaValue
+        this.currentVeggie = 'Bananen'
+      }
+      if (this.tabIndex === 1) {
+        this.currentValue = this.cucumberValue
+        this.currentVeggie = 'Gurken'
+      }
+      if (this.tabIndex === 2) {
+        this.currentValue = this.tomatoValue
+        this.currentVeggie = 'Tomaten'
+      }
+    }
+  }
 }
 </script>
 
@@ -236,5 +364,34 @@ export default {
       }
     }
   }
+}
+
+.veggieCount {
+  &__body {
+    max-height: 280px;
+    overflow-y: auto;
+    background: #343a40;
+  }
+
+  &__grid {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-template-columns: repeat(18, 30px);
+    grid-gap: 10px;
+    background: #343a40;
+  }
+
+  &__veggie {
+    width: 30px;
+    height: auto;
+  }
+}
+
+.customFooter{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  color: #deebf7;
+  font-size: 20px;
 }
 </style>

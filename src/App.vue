@@ -280,6 +280,14 @@ body {
   font-size: 36px;
 }
 
+.megabigtext{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: bold;
+  font-size: 56px;
+}
+
 .nav {
   height: 60px;
   width: 100%;

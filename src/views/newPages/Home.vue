@@ -1,18 +1,38 @@
 <template>
-<div class="page">
+<div class="page" @click="showInfo()">
   <div class="pageWrapper">
     <div class="infoContainer">
       <div class="info">
-        <span class="headline">Vertraue deinen Sinnen</span>
-        <div class="info__text">
+        <div class="info__text1" :class="{ active: text1 }">
+          <span class="headline--big">Stop Food</span><br>
+          <span class="megabigtext">Waste</span>
+        </div>
+        <div class="info__text2" :class="{ active: text2 }">
           <p>
-          Mindesthaltbarkeit, wie der Name schon sagt:<br>
-          Bis dahin ist etwas mindestens Haltbar.<br><br>
-          Also nur weil der Johgurt, die Milch oder andere Lebensmittel mit einem MHD mal einige Tage drüber sind,
-          heißt es nicht, dass man sie wegwerfen muss. <br><br>
-          Schaut sie euch genau an. Geruch. Optik. Konsistens.<br>
-          Wenn das alles noch gut ist, gibt es keinen Grund <br>
-          das Lebensmittel nicht zu essen oder in ein Gericht zu verarbeiten.
+          In Deutschland leben über<br>
+          <span class="bigtext">83 Millionen</span><br>
+          Menschen.
+          </p>
+        </div>
+        <div class="info__text3" :class="{ active: text3 }">
+          <img src="../../assets/images/newScenes/food/burger.png" alt="">
+          <p>
+          <span class="megabigtext">54,4</span><br>
+          <span class="headline--big">Millionen</span><br>
+          <span class="headline--big">Tonnen</span><br>
+          </p>
+        </div>
+        <div class="info__text4" :class="{ active: text4 }">
+          <img src="../../assets/images/newScenes/food/ein-drittel-burger.png" alt="">
+          <p>
+            Und ein Drittel davon landet in der Tonne.<br>
+          </p>
+        </div>
+        <div class="info__text5" :class="{ active: text5 }">
+        <span class="headline">Aber woran liegt das?</span>
+          <p>
+            Am besten wir machen uns zum Ort an dem alles beginnt,<br>
+            dem <span class="headline">Supermarkt</span>.<br>
           </p>
         </div>
       </div>
@@ -41,7 +61,37 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      clickCounter: 0,
+      text1: true,
+      text2: false,
+      text3: false,
+      text4: false,
+      text5: false
+    }
+  },
+  methods: {
+    showInfo () {
+      this.clickCounter++
+      if (this.clickCounter === 1) {
+        this.text1 = false
+        this.text2 = true
+      }
+      if (this.clickCounter === 2) {
+        this.text2 = false
+        this.text3 = true
+      }
+      if (this.clickCounter === 3) {
+        this.text3 = false
+        this.text4 = true
+      }
+      if (this.clickCounter === 4) {
+        this.text4 = false
+        this.text5 = true
+      }
+    }
+  }
 }
 </script>
 
@@ -177,10 +227,93 @@ export default {
 
       .info{
           position: absolute;
-          top: 50%;
+          top: 43%;
           left: 50%;
           transform: translate(-50%, -50%);
           width: 80%;
+
+        .info__text1{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 1000ms ease-out;
+
+          .megabigtext{
+            color: #deebf7;
+            font-size: 62px;
+          }
+        }
+
+        .info__text2{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 1000ms ease-in;
+        }
+
+        .info__text3{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 1000ms ease-in;
+
+          img{
+            position: absolute;
+            top: -50px;
+            left: 0px;
+            width: 400px;
+            z-index: -1;
+          }
+        }
+
+        .info__text4{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 1000ms ease-in;
+
+           img{
+            position: absolute;
+            top: -150px;
+            left: 0px;
+            width: 400px;
+            z-index: -1;
+          }
+
+          p{
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
+          }
+        }
+
+        .info__text5{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          transition: opacity 1000ms ease-in;
+        }
+
+      .active{
+          opacity: 1;
+        }
       }
     }
   }

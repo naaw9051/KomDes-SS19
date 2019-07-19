@@ -1,18 +1,17 @@
 <template>
-<div class="page">
+<div class="page" @click="showInfo()">
   <div class="pageWrapper">
     <div class="infoContainer">
       <div class="info">
-        <span class="headline">Vertraue deinen Sinnen</span>
-        <div class="info__text">
+        <div class="info__text1 animated fadeIn slow">
           <p>
-          Mindesthaltbarkeit, wie der Name schon sagt:<br>
-          Bis dahin ist etwas mindestens Haltbar.<br><br>
-          Also nur weil der Johgurt, die Milch oder andere Lebensmittel mit einem MHD mal einige Tage drüber sind,
-          heißt es nicht, dass man sie wegwerfen muss. <br><br>
-          Schaut sie euch genau an. Geruch. Optik. Konsistens.<br>
-          Wenn das alles noch gut ist, gibt es keinen Grund <br>
-          das Lebensmittel nicht zu essen oder in ein Gericht zu verarbeiten.
+            Pro Tag schmeißt jeder Einzelne <br> etwa <span class="headline">220 Gramm </span>weg.
+          </p>
+        </div>
+        <div class="info__text2 animated fadeIn slow delay-2s">
+          <p>
+            So viel ist das gar nicht?<br>
+            <span class="headline">Untersuch'</span> das Obst und Gemüse in der Kiste.<br>
           </p>
         </div>
       </div>
@@ -32,8 +31,8 @@
           <img class="gurke--bad" src="../../assets/images/newScenes/food/veggies/gurke-faul.png" alt="">
           <img class="gurke--good" src="../../assets/images/newScenes/food/veggies/gurke.png" alt="">
         </div>
-        <img class="tomato-right" src="../../assets/images/newScenes/food/veggies/tomate-rechts.png" alt="">
-        <img class="tomato-left" src="../../assets/images/newScenes/food/veggies/tomate-links.png" alt="">
+        <img v-b-tooltip.hover title="<- I'm with stupid" class="tomato-right" src="../../assets/images/newScenes/food/veggies/tomate-rechts.png" alt="">
+        <img v-b-tooltip.hover title="Schon wieder liegen geblieben..." class="tomato-left" src="../../assets/images/newScenes/food/veggies/tomate-links.png" alt="">
         <img class="crate--front" src="../../assets/images/newScenes/kiste-front.png" alt="">
       </div>
     </div>
@@ -61,7 +60,8 @@
       <template slot="modal-footer">
         <div class="customFooter">
           <p>
-            Umgerechnet werden <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }}/ Sekunde weggeschmissen. <br>
+            Das summiert sich zu <span class="headline">81 Kg</span>  pro Kopf im Jahr, <br> davon satte <span class="headline">53-55 Kg</span>  kann man vermeiden.<br>
+            Umgerechnet sind das <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }} pro Sekunde. <br>
             Ein Bild steht für {{ currentVeggie }}.
           </p>
         </div>
@@ -391,7 +391,7 @@ export default {
 
 .customFooter{
   position: relative;
-  left: -50px;
+  left: -120px;
   font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
   color: #deebf7;
   font-size: 20px;

@@ -46,7 +46,9 @@ export default {
       soundIcon: 'volume-up',
       playAudio: true,
       enterTransition: 'animated slideInRight',
-      leaveTransition: 'animated slideOutLeft'
+      leaveTransition: 'animated slideOutLeft',
+      ambientAudio: new Audio(require('./assets/audio/supermarket.mp3')),
+      allAudio: []
     }
   },
   methods: {
@@ -63,6 +65,9 @@ export default {
     }
   },
   mounted () {
+    this.ambientAudio.loop = true
+    this.ambientAudio.play()
+    this.allAudio.push(this.ambientAudio)
   },
   watch: {
     '$route' (to, from) {
@@ -74,19 +79,17 @@ export default {
       this.disableRightNavigation = toDepth + 1 > this.totalPages
     },
     playAudio: function () {
-      console.log(this.$children)
-      // if (this.playAudio) {
-      //   this.soundIcon = 'volume-up'
-      //   for (let audio of ) {
-      //     audio.loop = true
-      //     audio.play()
-      //   }
-      // } else {
-      //   this.soundIcon = 'volume-mute'
-      //   for (let audio of ) {
-      //     audio.pause()
-      //   }
-      // }
+      if (this.playAudio) {
+        this.soundIcon = 'volume-up'
+        for (let audio of this.allAudio) {
+          audio.play()
+        }
+      } else {
+        this.soundIcon = 'volume-mute'
+        for (let audio of this.allAudio) {
+          audio.pause()
+        }
+      }
     }
   }
 }

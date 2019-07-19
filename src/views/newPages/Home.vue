@@ -16,10 +16,13 @@
         </div>
         <div class="info__text3" :class="{ active: text3 }">
           <img src="../../assets/images/newScenes/food/burger.png" alt="">
-          <p>
+
           <span class="megabigtext">54,4</span><br>
           <span class="headline--big">Millionen</span><br>
           <span class="headline--big">Tonnen</span><br>
+
+          <p>
+            Lebensmittel verbrauchen wir im Jahr.<br>
           </p>
         </div>
         <div class="info__text4" :class="{ active: text4 }">
@@ -71,7 +74,7 @@ export default {
       text5: false,
       tex2Audio: new Audio(require('../../assets/audio/Audio1.mp3')),
       tex3Audio: new Audio(require('../../assets/audio/Audio2.mp3')),
-      tex4Audio: new Audio(require('../../assets/audio/Audio4.mp3')),
+      tex4Audio: new Audio(require('../../assets/audio/Audio3.mp3')),
       pageAudios: []
     }
   },
@@ -298,6 +301,14 @@ export default {
             left: 0px;
             width: 400px;
             z-index: -1;
+          }
+
+          p{
+            position: absolute;
+            top: 230px;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
           }
         }
 

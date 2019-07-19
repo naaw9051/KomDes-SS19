@@ -390,8 +390,11 @@ export default {
 }
 
 .customFooter{
+  position: relative;
+  left: -50px;
   font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
   color: #deebf7;
   font-size: 20px;
+  text-align: center;
 }
 </style>

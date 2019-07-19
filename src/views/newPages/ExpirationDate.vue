@@ -61,7 +61,6 @@ export default {
       background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
       background-size: contain;
       background-color: #0f2331;
-      border-left: #263845 solid 3px;
       position: relative;
 
       .info{

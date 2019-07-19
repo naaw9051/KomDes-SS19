@@ -105,21 +105,14 @@ export default {
       background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
       background-size: contain;
       background-color: #0f2331;
-      border-right: #263845 solid 3px;
       position: relative;
 
       .info{
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 80%;
-
-        &__description{
-        }
-
-        &__text{
-        }
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
       }
     }
   }

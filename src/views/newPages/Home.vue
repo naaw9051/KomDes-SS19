@@ -16,10 +16,13 @@
         </div>
         <div class="info__text3" :class="{ active: text3 }">
           <img src="../../assets/images/newScenes/food/burger.png" alt="">
-          <p>
+
           <span class="megabigtext">54,4</span><br>
           <span class="headline--big">Millionen</span><br>
           <span class="headline--big">Tonnen</span><br>
+
+          <p>
+            Lebensmittel verbrauchen wir im Jahr.<br>
           </p>
         </div>
         <div class="info__text4" :class="{ active: text4 }">
@@ -68,8 +71,18 @@ export default {
       text2: false,
       text3: false,
       text4: false,
-      text5: false
+      text5: false,
+      tex2Audio: new Audio(require('../../assets/audio/Audio1.mp3')),
+      tex3Audio: new Audio(require('../../assets/audio/Audio2.mp3')),
+      tex4Audio: new Audio(require('../../assets/audio/Audio3.mp3')),
+      pageAudios: []
     }
+  },
+  mounted () {
+    this.pageAudios = [this.tex2Audio, this.tex3Audio, this.tex4Audio]
+  },
+  beforeDestroy () {
+    this.stopAudio()
   },
   methods: {
     showInfo () {
@@ -77,18 +90,34 @@ export default {
       if (this.clickCounter === 1) {
         this.text1 = false
         this.text2 = true
+        this.startAudio(this.pageAudios[0])
       }
       if (this.clickCounter === 2) {
         this.text2 = false
         this.text3 = true
+        this.startAudio(this.pageAudios[1])
       }
       if (this.clickCounter === 3) {
         this.text3 = false
         this.text4 = true
+        this.startAudio(this.pageAudios[2])
       }
       if (this.clickCounter === 4) {
         this.text4 = false
         this.text5 = true
+      }
+    },
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
       }
     }
   }
@@ -272,6 +301,14 @@ export default {
             left: 0px;
             width: 400px;
             z-index: -1;
+          }
+
+          p{
+            position: absolute;
+            top: 230px;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
           }
         }
 

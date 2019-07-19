@@ -52,8 +52,21 @@ export default {
       toggleIndustrie: false,
       toggleGroßhandel: false,
       toggleHandel: false,
-      toggleHaushalt: false
+      toggleHaushalt: false,
+      introAudio: new Audio(require('../../assets/audio/Audio7.1.mp3')),
+      industrieAudio: new Audio(require('../../assets/audio/Audio7.2.mp3')),
+      großhandelAudio: new Audio(require('../../assets/audio/Audio9.mp3')),
+      handelAudio: new Audio(require('../../assets/audio/Audio8.mp3')),
+      haushaltAudio: new Audio(require('../../assets/audio/Audio10.mp3')),
+      pageAudios: []
     }
+  },
+  mounted () {
+    this.pageAudios = [this.introAudio, this.industrieAudio, this.großhandelAudio, this.handelAudio, this.haushaltAudio]
+    this.startAudio(this.pageAudios[0])
+  },
+  beforeDestroy () {
+    this.stopAudio()
   },
   methods: {
     showInfo: function (type) {
@@ -68,6 +81,7 @@ export default {
         this.infoText3 = this.industrieInfo[3]
         this.infoText4 = this.industrieInfo[4]
         this.infoText5 = this.industrieInfo[5]
+        this.startAudio(this.pageAudios[1])
       }
 
       if (type === 'großhandel') {
@@ -81,6 +95,7 @@ export default {
         this.infoText3 = this.großhandelInfo[3]
         this.infoText4 = this.großhandelInfo[4]
         this.infoText5 = this.großhandelInfo[5]
+        this.startAudio(this.pageAudios[2])
       }
 
       if (type === 'handel') {
@@ -94,6 +109,7 @@ export default {
         this.infoText3 = this.handelInfo[3]
         this.infoText4 = this.handelInfo[4]
         this.infoText5 = this.handelInfo[5]
+        this.startAudio(this.pageAudios[3])
       }
 
       if (type === 'haushalt') {
@@ -107,6 +123,20 @@ export default {
         this.infoText3 = this.haushaltInfo[3]
         this.infoText4 = this.haushaltInfo[4]
         this.infoText5 = this.haushaltInfo[5]
+        this.startAudio(this.pageAudios[4])
+      }
+    },
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
       }
     }
   }

@@ -2,12 +2,12 @@
 <div class="page">
   <div class="pageWrapper">
     <div class="infoContainer">
-      <span class="headline--big">Werd' aktiv und hilf' mit!</span>
+      <span class="headline--big">Was kannst du tun?</span>
       <p>
         Keine Panik, schon mit kleinen Veränderungen kann man viel bewirken.<br>
         Und einfach ist es gleich dazu.<br>
       </p>
-      <span class="headline">Schritt für Schritt</span>
+      <span class="headline">Werd' aktiv und hilf' mit!</span>
     </div>
   </div>
 </div>
@@ -15,7 +15,34 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      transitionAudio: new Audio(require('../../assets/audio/Audio11.mp3')),
+      pageAudios: []
+    }
+  },
+  mounted () {
+    this.pageAudios = [this.transitionAudio]
+    this.startAudio(this.transitionAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
+  },
+  methods: {
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+    }
+  }
 }
 </script>
 

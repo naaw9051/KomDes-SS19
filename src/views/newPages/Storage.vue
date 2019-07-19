@@ -33,7 +33,34 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      storingAudio: new Audio(require('../../assets/audio/Audio13.mp3')),
+      pageAudios: []
+    }
+  },
+  mounted () {
+    this.pageAudios = [this.storingAudio]
+    this.startAudio(this.storingAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
+  },
+  methods: {
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+    }
+  }
 }
 </script>
 

@@ -22,7 +22,34 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      foodSharingAudio: new Audio(require('../../assets/audio/Audio15.mp3')),
+      pageAudios: []
+    }
+  },
+  mounted () {
+    this.pageAudios = [this.foodSharingAudio]
+    this.startAudio(this.foodSharingAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
+  },
+  methods: {
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+    }
+  }
 }
 </script>
 

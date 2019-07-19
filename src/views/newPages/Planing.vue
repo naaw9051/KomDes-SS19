@@ -24,7 +24,34 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      planingAudio: new Audio(require('../../assets/audio/Audio14.mp3')),
+      pageAudios: []
+    }
+  },
+  mounted () {
+    this.pageAudios = [this.planingAudio]
+    this.startAudio(this.planingAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
+  },
+  methods: {
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+    }
+  }
 }
 </script>
 

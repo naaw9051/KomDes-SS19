@@ -9,9 +9,18 @@
         <router-link to="/1"><div class="paging__dots--link"></div></router-link>
         <router-link to="/2"><div class="paging__dots--link"></div></router-link>
         <router-link to="/3"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/4"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/5"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/6"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/7"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/8"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/9"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/10"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/11"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/12"><div class="paging__dots--link"></div></router-link>
       </div>
       <div class="paging__branding">
-        Sgeht?
+        <img class="paging__branding--logo" src="./assets/images/newScenes/Lagerung3.png" alt="">
       </div>
     </div>
     <button class="arrowLeft customBtn" @click="previousPage()" :disabled=" disableLeftNavigation">
@@ -157,6 +166,10 @@ body {
     margin-right: 20px;
     font-size: 18px;
     text-transform: uppercase;
+
+    &--logo{
+      width: 50px;
+    }
   }
 
   &__dots {

@@ -1,6 +1,15 @@
 <template>
 <div class="page">
-
+  <div class="pageWrapper">
+    <div class="infoContainer">
+      <span class="headline--big">Werd' aktiv und hilf' mit!</span>
+      <p>
+        Keine Panik, schon mit kleinen Veränderungen kann man viel bewirken.<br>
+        Und einfach ist es gleich dazu.<br>
+      </p>
+      <span class="headline">Schritt für Schritt</span>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -12,120 +21,21 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
-
-  .backgroundContainer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left:0;
-    top: 0;
-
-    .background {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url('../../assets/images/background.jpg') 0 0 no-repeat;
-
-      &__counter {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: auto;
-      }
-
-      &__burgerpile {
-        position: absolute;
-        right: 525px;
-        bottom: 0;
-        width: auto;
-        height: 400px;
-      }
-
-      &__cup {
-        position: absolute;
-        margin-right: -70px;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: 90%;
-        filter: blur(3px);
-      }
-    }
-  }
-
-  .foreground {
+  .pageWrapper {
     position: relative;
+    background: #0f2331;
     width: 100%;
     height: 100%;
+    background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
+    background-size: contain;
+    background-color: #0f2331;
 
-    .info {
+    .infoContainer {
       position: absolute;
-      left: 120px;
       top: 50%;
-      transform: translateY(-50%);
-      width: 400px;
-      color: #afafaf;
-
-      &__title {
-        font-size: 30px;
-        white-space:nowrap;
-      }
-
-      &__text {
-        font-size: 16px;
-      }
-
-      &__fact {
-        font-size: 16px;
-        font-weight: bold;
-      }
-    }
-
-    &__burger {
-      position: absolute;
-      right: 200px;
-      bottom: 100px;
-      width: 283px;
-      height: 200px;
-      filter: drop-shadow(0 0 30px #d37321);
-      transition: filter 1000ms ease-in;
-
-      &:hover {
-        filter: drop-shadow(0 0 30px #33442a);
-      }
-
-      &:hover .foreground__burger--bad  {
-        opacity: 1;
-      }
-
-      &:hover .foreground__burger--good  {
-        opacity: 0;
-      }
-
-      &--good {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 200px;
-        width: auto;
-        object-fit: contain;
-        opacity: 1;
-        transition: opacity 1000ms ease-in;
-      }
-
-      &--bad {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 220px;
-        width: auto;
-        object-fit: contain;
-        opacity: 0;
-        transition: opacity 1000ms ease-in;
-      }
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
     }
   }
 }

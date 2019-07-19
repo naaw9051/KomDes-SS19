@@ -76,6 +76,11 @@
         </p>
       </div>
     </div>
+    <div class="infoContainer animated slideOutRight delay-3s">
+      <div class="info">
+        <span class="headline--big">Die Zusammensetzung der vermeidbaren Abfälle</span>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -96,6 +101,13 @@ export default {
     background: url('../../assets/images/newScenes/backgrounds/background-blue.png') center no-repeat;
     background-size: contain;
     background-color: #0f2331;
+
+    .infoContainer {
+      position: absolute;
+      top: 40%;
+      width: 80%;
+      left: 10%;
+    }
 
     .sectionContainer{
       position: relative;
@@ -282,5 +294,8 @@ export default {
    p{
     font-size: 10px;
   }
+}
+.headline--big{
+  color: #6aa7cc;
 }
 </style>

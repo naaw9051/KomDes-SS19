@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LandingPage from './views/LandingPage.vue'
-import StoreFront from './views/StoreFront.vue'
-import StoreShelf from './views/StoreShelf.vue'
 
 import Home from './views/newPages/Home.vue'
 import Store from './views/newPages/Store.vue'
 import Countries from './views/newPages/Countries.vue'
 import WasteTypes from './views/newPages/WasteTypes.vue'
 import WasteGroups from './views/newPages/WasteGroups.vue'
+import Transition from './views/newPages/Transition.vue'
 import ExpirationDate from './views/newPages/ExpirationDate.vue'
 import Storage from './views/newPages/Storage.vue'
 import Planing from './views/newPages/Planing.vue'
@@ -51,48 +49,38 @@ export default new Router({
     },
     {
       path: '/6',
+      name: 'Transition',
+      component: Transition
+    },
+    {
+      path: '/7',
       name: 'ExpirationDate',
       component: ExpirationDate
     },
     {
-      path: '/7',
+      path: '/8',
       name: 'Storage',
       component: Storage
     },
     {
-      path: '/8',
+      path: '/9',
       name: 'Planing',
       component: Planing
     },
     {
-      path: '/9',
+      path: '/10',
       name: 'FoodSharing',
       component: FoodSharing
     },
     {
-      path: '/10',
+      path: '/11',
       name: 'Influences',
       component: Influences
     },
     {
-      path: '/11',
+      path: '/12',
       name: 'Credits',
       component: Credits
-    },
-    {
-      path: '/20',
-      name: 'LandingPage',
-      component: LandingPage
-    },
-    {
-      path: '/21',
-      name: 'StroreFront',
-      component: StoreFront
-    },
-    {
-      path: '/22',
-      name: 'StroreShelf',
-      component: StoreShelf
     }
   ]
 })

@@ -61,8 +61,8 @@
         <div class="customFooter">
           <p>
             Das summiert sich zu <span class="headline">81 Kg</span>  pro Kopf im Jahr, <br> davon satte <span class="headline">53-55 Kg</span>  kann man vermeiden.<br>
-            Umgerechnet sind das <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }} pro Sekunde. <br>
-            Ein Bild steht für {{ currentVeggie }}.
+            Umgerechnet sind das <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }}. <br>
+            Ein Bild steht für <b> {{ unitSize }} </b>{{ currentVeggie }}.
           </p>
         </div>
       </template>
@@ -81,11 +81,11 @@ export default {
       tomatoes: [],
       drawnVeggies: false,
       // Weight of veggie in grams
-      bananaWeight: 150,
-      cucumberWeight: 300,
-      tomatoWeight: 80,
+      bananaWeight: 120,
+      cucumberWeight: 400,
+      tomatoWeight: 90,
       // One image in the grid represents 100 units (like tomatoes)
-      unitSize: 100,
+      unitSize: 1,
       // calculated veggies
       bananaValue: 0,
       cucumberValue: 0,
@@ -111,15 +111,15 @@ export default {
       if (!this.drawnVeggies) { this.drawVeggies() }
       if (this.tabIndex === 0) {
         this.currentValue = this.bananaValue
-        this.currentVeggie = 'Bananen'
+        this.currentVeggie = 'Banane'
       }
       if (this.tabIndex === 1) {
         this.currentValue = this.cucumberValue
-        this.currentVeggie = 'Gurken'
+        this.currentVeggie = 'Gurke'
       }
       if (this.tabIndex === 2) {
         this.currentValue = this.tomatoValue
-        this.currentVeggie = 'Tomaten'
+        this.currentVeggie = 'Tomate'
       }
       this.startAudio(this.modalAudio)
     },
@@ -136,7 +136,7 @@ export default {
     },
     calculateVeggies () {
       let numbers = []
-      let wasteInKG = 2000
+      let wasteInKG = 55
 
       // Rechnung für bananas
       let result = ((wasteInKG * 1000) / this.bananaWeight) / this.unitSize
@@ -414,7 +414,7 @@ export default {
 
 .customFooter{
   position: relative;
-  left: -120px;
+  left: -190px;
   font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
   color: #deebf7;
   font-size: 20px;

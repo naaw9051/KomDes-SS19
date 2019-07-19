@@ -18,6 +18,7 @@
         <router-link to="/10"><div class="paging__dots--link"></div></router-link>
         <router-link to="/11"><div class="paging__dots--link"></div></router-link>
         <router-link to="/12"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/13"><div class="paging__dots--link"></div></router-link>
       </div>
       <div class="paging__branding">
         <img class="paging__branding--logo" src="./assets/images/newScenes/Lagerung3.png" alt="">

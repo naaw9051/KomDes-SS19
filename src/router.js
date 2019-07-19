@@ -13,6 +13,7 @@ import Planing from './views/newPages/Planing.vue'
 import FoodSharing from './views/newPages/FoodSharing.vue'
 import Influences from './views/newPages/Influences.vue'
 import Credits from './views/newPages/Credits.vue'
+import Calendar from './views/newPages/Calendar.vue'
 
 Vue.use(Router)
 
@@ -39,46 +40,51 @@ export default new Router({
     },
     {
       path: '/4',
+      name: 'Calendar',
+      component: Calendar
+    },
+    {
+      path: '/5',
       name: 'WasteTypes',
       component: WasteTypes
     },
     {
-      path: '/5',
+      path: '/6',
       name: 'WasteGroups',
       component: WasteGroups
     },
     {
-      path: '/6',
+      path: '/7',
       name: 'Transition',
       component: Transition
     },
     {
-      path: '/7',
+      path: '/8',
       name: 'ExpirationDate',
       component: ExpirationDate
     },
     {
-      path: '/8',
+      path: '/9',
       name: 'Storage',
       component: Storage
     },
     {
-      path: '/9',
+      path: '/10',
       name: 'Planing',
       component: Planing
     },
     {
-      path: '/10',
+      path: '/11',
       name: 'FoodSharing',
       component: FoodSharing
     },
     {
-      path: '/11',
+      path: '/12',
       name: 'Influences',
       component: Influences
     },
     {
-      path: '/12',
+      path: '/13',
       name: 'Credits',
       component: Credits
     }

@@ -26,7 +26,34 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      mhdAudio: new Audio(require('../../assets/audio/Audio12.mp3')),
+      pageAudios: []
+    }
+  },
+  mounted () {
+    this.pageAudios = [this.mhdAudio]
+    this.startAudio(this.mhdAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
+  },
+  methods: {
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+    }
+  }
 }
 </script>
 

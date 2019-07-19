@@ -46,11 +46,7 @@ export default {
       soundIcon: 'volume-up',
       playAudio: true,
       enterTransition: 'animated slideInRight',
-      leaveTransition: 'animated slideOutLeft',
-      currentAudios: [],
-      pageOneAudios: [new Audio(require('./assets/audio/city.mp3'))],
-      pageTwoAudios: [new Audio(require('./assets/audio/supermarket.mp3'))],
-      pageThreeAudios: [new Audio(require('./assets/audio/supermarket.mp3'))]
+      leaveTransition: 'animated slideOutLeft'
     }
   },
   methods: {
@@ -62,28 +58,11 @@ export default {
       let newRoute = parseInt(this.$route.path.slice(1)) - 1
       if (!this.disableLeftNavigation) { this.$router.push(`${newRoute}`) }
     },
-    changeAudio: function (route) {
-      for (let audio of this.currentAudios) {
-        audio.pause()
-      }
-
-      if (route === 1) { this.currentAudios = this.pageOneAudios }
-      if (route === 2) { this.currentAudios = this.pageTwoAudios }
-      if (route === 3) { this.currentAudios = this.pageThreeAudios }
-
-      if (this.playAudio) {
-        for (let audio of this.currentAudios) {
-          audio.loop = true
-          audio.play()
-        }
-      }
-    },
     toggleSound: function () {
       this.playAudio = !this.playAudio
     }
   },
   mounted () {
-    this.changeAudio(parseInt(this.$route.path.slice(1)))
   },
   watch: {
     '$route' (to, from) {
@@ -93,21 +72,21 @@ export default {
       this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
       this.disableLeftNavigation = toDepth - 1 < 1
       this.disableRightNavigation = toDepth + 1 > this.totalPages
-      this.changeAudio(toDepth)
     },
     playAudio: function () {
-      if (this.playAudio) {
-        this.soundIcon = 'volume-up'
-        for (let audio of this.currentAudios) {
-          audio.loop = true
-          audio.play()
-        }
-      } else {
-        this.soundIcon = 'volume-mute'
-        for (let audio of this.currentAudios) {
-          audio.pause()
-        }
-      }
+      console.log(this.$children)
+      // if (this.playAudio) {
+      //   this.soundIcon = 'volume-up'
+      //   for (let audio of ) {
+      //     audio.loop = true
+      //     audio.play()
+      //   }
+      // } else {
+      //   this.soundIcon = 'volume-mute'
+      //   for (let audio of ) {
+      //     audio.pause()
+      //   }
+      // }
     }
   }
 }

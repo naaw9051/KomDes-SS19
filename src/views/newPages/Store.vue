@@ -8,7 +8,7 @@
             Pro Tag schmeißt jeder Einzelne <br> etwa <span class="headline">220 Gramm </span>weg.
           </p>
         </div>
-        <div class="info__text2 animated fadeIn slow delay-2s">
+        <div class="info__text2 animated fadeIn slow delay-4s">
           <p>
             So viel ist das gar nicht?<br>
             <span class="headline">Untersuch'</span> das Obst und Gemüse in der Kiste.<br>
@@ -91,8 +91,18 @@ export default {
       cucumberValue: 0,
       tomatoValue: 0,
       currentValue: 0,
-      currentVeggie: ''
+      currentVeggie: '',
+      storeAudio: new Audio(require('../../assets/audio/Audio5.mp3')),
+      modalAudio: new Audio(require('../../assets/audio/Audio6.mp3')),
+      pageAudios: []
     }
+  },
+  mounted () {
+    this.pageAudios = [this.storeAudio]
+    this.startAudio(this.storeAudio)
+  },
+  beforeDestroy () {
+    this.stopAudio()
   },
   methods: {
     openModal (index) {
@@ -111,6 +121,7 @@ export default {
         this.currentValue = this.tomatoValue
         this.currentVeggie = 'Tomaten'
       }
+      this.startAudio(this.modalAudio)
     },
     drawVeggies () {
       this.drawnVeggies = true
@@ -153,6 +164,19 @@ export default {
         array.push(count)
         count++
       }, 80)
+    },
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
     }
   },
   watch: {

@@ -34,8 +34,18 @@ export default {
       moneyInfo: ['Geld sparen', 'Wir kaufen viel zu viel ein. Dadurch steigert sich die Nachfrage und erhöht so unnötig die Preise von Grundnahrungsmitteln. Im Jahr könnte man pro Person etwa 235-300 Euro sparen. Mit diesen 250 Euro könntest du deinen nächsten Städtetrip planen.'],
       toggleEnv: false,
       toggleRes: false,
-      toggleMoney: false
+      toggleMoney: false,
+      environmentAudio: new Audio(require('../../assets/audio/Audio17.mp3')),
+      resourcesAudio: new Audio(require('../../assets/audio/Audio18.mp3')),
+      moneyAudio: new Audio(require('../../assets/audio/Audio19.mp3')),
+      pageAudios: []
     }
+  },
+  mounted () {
+    this.pageAudios = [this.environmentAudio, this.resourcesAudio, this.moneyAudio]
+  },
+  beforeDestroy () {
+    this.stopAudio()
   },
   methods: {
     showInfo: function (type) {
@@ -45,6 +55,7 @@ export default {
         this.toggleMoney = false
         this.headline = this.environmentInfo[0]
         this.infoText = this.environmentInfo[1]
+        this.startAudio(this.environmentAudio)
       }
 
       if (type === 'resources') {
@@ -53,6 +64,7 @@ export default {
         this.toggleMoney = false
         this.headline = this.resourcesInfo[0]
         this.infoText = this.resourcesInfo[1]
+        this.startAudio(this.resourcesAudio)
       }
 
       if (type === 'money') {
@@ -61,6 +73,20 @@ export default {
         this.toggleMoney = true
         this.headline = this.moneyInfo[0]
         this.infoText = this.moneyInfo[1]
+        this.startAudio(this.moneyAudio)
+      }
+    },
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
       }
     }
   }

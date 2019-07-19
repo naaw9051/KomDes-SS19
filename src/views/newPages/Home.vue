@@ -68,8 +68,18 @@ export default {
       text2: false,
       text3: false,
       text4: false,
-      text5: false
+      text5: false,
+      tex2Audio: new Audio(require('../../assets/audio/Audio1.mp3')),
+      tex3Audio: new Audio(require('../../assets/audio/Audio2.mp3')),
+      tex4Audio: new Audio(require('../../assets/audio/Audio4.mp3')),
+      pageAudios: []
     }
+  },
+  mounted () {
+    this.pageAudios = [this.tex2Audio, this.tex3Audio, this.tex4Audio]
+  },
+  beforeDestroy () {
+    this.stopAudio()
   },
   methods: {
     showInfo () {
@@ -77,18 +87,34 @@ export default {
       if (this.clickCounter === 1) {
         this.text1 = false
         this.text2 = true
+        this.startAudio(this.pageAudios[0])
       }
       if (this.clickCounter === 2) {
         this.text2 = false
         this.text3 = true
+        this.startAudio(this.pageAudios[1])
       }
       if (this.clickCounter === 3) {
         this.text3 = false
         this.text4 = true
+        this.startAudio(this.pageAudios[2])
       }
       if (this.clickCounter === 4) {
         this.text4 = false
         this.text5 = true
+      }
+    },
+    startAudio: function (audioFile) {
+      for (let audio of this.pageAudios) {
+        audio.pause()
+      }
+      if (this.$parent.playAudio) {
+        audioFile.play()
+      }
+    },
+    stopAudio: function () {
+      for (let audio of this.pageAudios) {
+        audio.pause()
       }
     }
   }

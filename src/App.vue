@@ -119,8 +119,8 @@ export default {
 
 @font-face {
   font-family: 'Barlow Black';
-  src: url('./assets/fonts/barlow/Barlow-Light.ttf');
-  font-weight: 300;
+  src: url('./assets/fonts/barlow/Barlow-SemiBold.ttf');
+  font-weight: 600;
 }
 
 @font-face {
@@ -256,6 +256,14 @@ body {
   color: #6aa7cc;
   font-weight: bold;
   font-size: 42px;
+}
+
+.bigtext{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: 600;
+  font-size: 36px;
 }
 
 .nav {

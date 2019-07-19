@@ -61,7 +61,7 @@
         <div class="customFooter">
           <p>
             Das summiert sich zu <span class="headline">81 Kg</span>  pro Kopf im Jahr, <br> davon satte <span class="headline">53-55 Kg</span>  kann man vermeiden.<br>
-            Umgerechnet sind das <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }}. <br>
+            Umgerechnet sind das <span class="headline--big">{{ currentValue }}</span> {{ currentVeggie }}n. <br>
             Ein Bild steht für <b> {{ unitSize }} </b>{{ currentVeggie }}.
           </p>
         </div>

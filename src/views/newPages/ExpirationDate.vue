@@ -9,11 +9,11 @@
         <span class="headline">Vertraue deinen Sinnen</span>
         <div class="info__text">
           <p>
-          Mindesthaltbarkeit, wie der Name schon sagt:<br>
-          Bis dahin ist etwas mindestens Haltbar.<br><br>
-          Also nur weil der Johgurt, die Milch oder andere Lebensmittel mit einem MHD mal einige Tage drüber sind,
+          Mindesthaltbarkeit - wie der Name schon sagt:<br>
+          Bis dahin ist etwas mindestens haltbar.<br><br>
+          Also nur weil der Joghurt, die Milch oder andere Lebensmittel mit einem MHD mal einige Tage drüber sind,
           heißt es nicht, dass man sie wegwerfen muss. <br><br>
-          Schaut sie euch genau an. Geruch. Optik. Konsistens.<br>
+          Schaut sie euch genau an. Geruch. Optik. Konsistenz.<br>
           Wenn das alles noch gut ist, gibt es keinen Grund <br>
           das Lebensmittel nicht zu essen oder in ein Gericht zu verarbeiten.
           </p>

@@ -47,7 +47,7 @@ export default {
       playAudio: true,
       enterTransition: 'animated slideInRight',
       leaveTransition: 'animated slideOutLeft',
-      ambientAudio: new Audio(require('./assets/audio/supermarket.mp3')),
+      ambientAudio: new Audio(require('./assets/audio/loop-leise.wav')),
       allAudio: []
     }
   },

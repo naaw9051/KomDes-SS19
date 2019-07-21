@@ -9,9 +9,19 @@
         <router-link to="/1"><div class="paging__dots--link"></div></router-link>
         <router-link to="/2"><div class="paging__dots--link"></div></router-link>
         <router-link to="/3"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/4"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/5"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/6"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/7"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/8"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/9"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/10"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/11"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/12"><div class="paging__dots--link"></div></router-link>
+        <router-link to="/13"><div class="paging__dots--link"></div></router-link>
       </div>
       <div class="paging__branding">
-        Sgeht?
+        <img class="paging__branding--logo" src="./assets/images/newScenes/Lagerung3.png" alt="">
       </div>
     </div>
     <button class="arrowLeft customBtn" @click="previousPage()" :disabled=" disableLeftNavigation">
@@ -30,16 +40,15 @@
 export default {
   data () {
     return {
+      totalPages: 15,
       disableLeftNavigation: false,
       disableRightNavigation: false,
       soundIcon: 'volume-up',
       playAudio: true,
       enterTransition: 'animated slideInRight',
       leaveTransition: 'animated slideOutLeft',
-      currentAudios: [],
-      pageOneAudios: [new Audio(require('./assets/audio/city.mp3'))],
-      pageTwoAudios: [new Audio(require('./assets/audio/supermarket.mp3'))],
-      pageThreeAudios: [new Audio(require('./assets/audio/supermarket.mp3'))]
+      ambientAudio: new Audio(require('./assets/audio/loop-leise.wav')),
+      allAudio: []
     }
   },
   methods: {
@@ -51,49 +60,33 @@ export default {
       let newRoute = parseInt(this.$route.path.slice(1)) - 1
       if (!this.disableLeftNavigation) { this.$router.push(`${newRoute}`) }
     },
-    changeAudio: function (route) {
-      for (let audio of this.currentAudios) {
-        audio.pause()
-      }
-
-      if (route === 1) { this.currentAudios = this.pageOneAudios }
-      if (route === 2) { this.currentAudios = this.pageTwoAudios }
-      if (route === 3) { this.currentAudios = this.pageThreeAudios }
-
-      if (this.playAudio) {
-        for (let audio of this.currentAudios) {
-          audio.loop = true
-          audio.play()
-        }
-      }
-    },
     toggleSound: function () {
       this.playAudio = !this.playAudio
     }
   },
   mounted () {
-    this.changeAudio(parseInt(this.$route.path.slice(1)))
+    this.ambientAudio.loop = true
+    this.ambientAudio.play()
+    this.allAudio.push(this.ambientAudio)
   },
   watch: {
     '$route' (to, from) {
-      const toDepth = to.path.slice(1)
-      const fromDepth = from.path.slice(1)
+      const toDepth = parseInt(to.path.slice(1))
+      const fromDepth = parseInt(from.path.slice(1))
       this.enterTransition = toDepth < fromDepth ? 'animated slideInLeft' : 'animated slideInRight'
       this.leaveTransition = toDepth < fromDepth ? 'animated slideOutRight' : 'animated slideOutLeft'
-      this.disableLeftNavigation = parseInt(toDepth) - 1 < 1
-      this.disableRightNavigation = parseInt(toDepth) + 1 > 3
-      this.changeAudio(parseInt(toDepth))
+      this.disableLeftNavigation = toDepth - 1 < 1
+      this.disableRightNavigation = toDepth + 1 > this.totalPages
     },
     playAudio: function () {
       if (this.playAudio) {
         this.soundIcon = 'volume-up'
-        for (let audio of this.currentAudios) {
-          audio.loop = true
+        for (let audio of this.allAudio) {
           audio.play()
         }
       } else {
         this.soundIcon = 'volume-mute'
-        for (let audio of this.currentAudios) {
+        for (let audio of this.allAudio) {
           audio.pause()
         }
       }
@@ -104,6 +97,29 @@ export default {
 
 <style lang="scss">
 @import './../node_modules/animate.css/animate.min.css';
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Medium.ttf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Black.ttf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-SemiBold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Barlow Black';
+  src: url('./assets/fonts/barlow/Barlow-Regular.ttf');
+  font-weight: 500;
+}
 
 body {
   margin: 0;
@@ -111,11 +127,12 @@ body {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #deebf7;
+  font-size: 20px;
 }
 
 .paging {
@@ -132,6 +149,10 @@ body {
     margin-right: 20px;
     font-size: 18px;
     text-transform: uppercase;
+
+    &--logo{
+      width: 50px;
+    }
   }
 
   &__dots {
@@ -214,5 +235,46 @@ body {
 .page {
   position: fixed;
   width: 100%;
+  height: calc(100% - 60px);
+}
+
+.headline{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.headline--big{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: bold;
+  font-size: 42px;
+}
+
+.bigtext{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.megabigtext{
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #6aa7cc;
+  font-weight: bold;
+  font-size: 56px;
+}
+
+.nav {
+  height: 60px;
+  width: 100%;
+  font-family: 'Barlow Black', Helvetica, Arial, sans-serif;
+  align-items: center;
+  background: #343a40 ;
 }
 </style>
